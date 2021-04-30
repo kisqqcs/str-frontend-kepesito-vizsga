@@ -3,17 +3,29 @@
     <div class="form-group">
       <label class="text-warning" for="title">Movie Title:</label>
       <input id="title" type="text" class="form-control"
-        required pattern="" name="title" [(ngModel)]="movie.title">
+        required pattern="^[a-űA-Ű ]{5,25}$" name="title" [(ngModel)]="movie.title">
     </div>
     <div class="row">
       <div class="form-group col-6">
-
+        <label class="text-warning" for="year">Release year:</label>
+        <input id="year" type="text" class="form-control"
+        required pattern="^(19[0-9]{2})|(20([0-1][0-9]|2[0-1]))$" name="year" [(ngModel)]="movie.year">
       </div>
       <div class="form-group col-6">
-
+        <label class="text-warning" for="category">Category:</label>
+        <select name="category" id="category" type="text" class="form-control" required
+          [(ngModel)]="movie.category">
+          <option value="Choose Category" selected disabled>Choose Category</option>
+          <option value="Drama">Drama</option>
+          <option value="Action">Action</option>
+          <option value="Fantasy">Fantasy</option>
+        </select>
       </div>
     </div>
-
+    <button [disabled]="movieForm.invalid" [disabled]="clicked" type="submit" class="btn btn-warning" (click)=saveMovie(movie)>Save</button>
+    <small [hidden]="movieForm.controls.title?.valid || movieForm.controls.title?.pristine || 
+    movieForm.controls.year?.valid || movieForm.controls.year?.pristine || movieForm.controls.category?.valid || movieForm.controls.category?.pristine"
+    class="text-danger">Fill all field to save!</small>
   </form>
 
 
